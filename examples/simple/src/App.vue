@@ -101,6 +101,7 @@ export default {
       }).then((data) => {
         console.log(data)
         this.tagLabel = '';
+        this.tags.push(data.data.addTag)
       }).catch((error) => {
         console.error(error)
       })
