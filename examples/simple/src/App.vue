@@ -43,13 +43,15 @@
 import gql from 'graphql-tag'
 
 export default {
-  data: () => ({
-    pingInput: '',
-    tagLabel: '',
-    hello: '',
-    pingMessage: '',
-    tags: []
-  }),
+  data () {
+    return {
+      pingInput: '',
+      tagLabel: '',
+      hello: '',
+      pingMessage: '',
+      tags: []
+    }
+  },
   apollo: {
     data: {
       hello: gql`{hello}`,

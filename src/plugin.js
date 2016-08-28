@@ -80,11 +80,11 @@ export class DollarApollo {
       loadingDone()
 
       if (typeof options.update === 'function') {
-        vm.$set(key, options.update.call(vm, data))
+        vm.$set(vm, key, options.update.call(vm, data))
       } else if (data[key] === undefined) {
         console.error(`Missing ${key} attribute on result`, data)
       } else {
-        vm.$set(key, data[key])
+        vm.$set(vm, key, data[key])
       }
 
       if (typeof options.result === 'function') {
