@@ -20,12 +20,15 @@ function addTag (label) {
 const resolvers = {
   Query: {
     tags (root, args, context) {
+      console.log(`query tags '${tags}'`)
       return tags
     },
     hello (root, args, context) {
+      console.log(`query hello`)
       return 'Hello world!'
     },
     ping (root, { message }, context) {
+      console.log(`query ping '${message}'`)
       return `Answering ${message}`
     }
   },

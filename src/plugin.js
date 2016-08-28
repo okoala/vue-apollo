@@ -1,13 +1,13 @@
-import { VueApollo } from './client'
+import { VueApolloClient } from './client'
 
-class DollarApollo {
+export class DollarApollo {
   constructor (vm) {
     this.vm = vm
     this.querySubscriptions = {}
   }
 
   get client () {
-    return VueApollo.client
+    return VueApolloClient.client
   }
 
   get query () {
@@ -151,53 +151,8 @@ class DollarApollo {
           variables,
           forceFetch,
           fragments
-        }).then(nextResult).cath(sendingError)
+        }).then(nextResult).catch(sendingError)
       }
     }
   }
 }
-
-function install (Vue) {
-  const init = Vue.prototype._init
-  Vue.prototype._init = function (options = {}) {
-    this._apolloSubscriptions = []
-    this.$apollo = new DollarApollo(this)
-    init.call(this, options)
-  }
-
-  const destroy = Vue.prototype._destroy
-  Vue.prototype._destroy = function () {
-    if (!this._isBeingDestroyed && this.$apollo) {
-      this.$apollo = null
-    }
-    destroy.apply(this, arguments)
-  }
-
-  Vue.mixin({
-    beforeCompile () {
-      const apollo = this.$options.apollo
-      if (apollo) {
-        // One-time queries with $query(), called each time a Vue dependency is updated (using $watch)
-        if (apollo.data) {
-          for (const key in apollo.data) {
-            this.$apollo.option(key, apollo.data[key], false)
-          }
-        }
-
-        // Auto updating queries with $watchQuery(), re-called each time a Vue dependency is updated (using $watch)
-        if (apollo.watch) {
-          for (const key in apollo.watch) {
-            this.$apollo.option(key, apollo.watch[key], true)
-          }
-        }
-      }
-    },
-
-    destroyed () {
-      this._apolloSubscriptions.forEach(sub => sub.unsubscribe())
-      this._apolloSubscriptions = null
-    }
-  })
-}
-
-module.exports = { install }

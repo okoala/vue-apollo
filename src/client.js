@@ -12,8 +12,8 @@ import _ from 'lodash'
 const apolloClientOptions = {}
 let apolloClient = null
 
-export class VueApollo {
-  static setApolloClientOptions (options) {
+export class VueApolloClient {
+  static setOptions (options) {
     _.merge(apolloClientOptions, options)
     if (apolloClient) {
       console.warn('Options set after the apollo client has been created will not be applied.')
@@ -31,7 +31,7 @@ export class VueApollo {
 
   static get client () {
     if (!apolloClient) {
-      VueApollo.createClient()
+      VueApolloClient.createClient()
     }
     return apolloClient
   }

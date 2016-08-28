@@ -72,17 +72,14 @@ export default {
         error(errors, type) {
           console.error(`We've got ${errors.length} errors of type '${type}'`)
         }
-      }
-    },
-    watch: {
+      },
       tags: {
         query: gql`{
           tags {
             id,
             label
           }
-        }`,
-        pollInterval: 300
+        }`
       }
     }
   },

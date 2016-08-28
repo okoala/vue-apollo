@@ -27,6 +27,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url',
         query: {

@@ -1,5 +1,5 @@
 process.env.VUE_ENV = 'server'
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = global.isProd = process.env.NODE_ENV === 'production'
 
 const fs = require('fs')
 const path = require('path')
@@ -12,9 +12,9 @@ const { apolloExpress, graphiqlExpress } = require('apollo-server')
 const createBundleRenderer = require('vue-server-renderer').createBundleRenderer
 
 const schema = require('./src/api')
-
+const config = require('./config/config.public')
 const app = express()
-const port = process.env.PORT || 3000
+const port = config.port
 
 // parse index.html template
 const html = (() => {

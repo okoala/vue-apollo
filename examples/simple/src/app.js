@@ -1,15 +1,30 @@
 import Vue from 'vue'
-import { initApollo, VueApollo } from '../../../src/index'
+import VueApollo, { VueApolloClient, createNetworkInterface } from '../../../src/index'
 import store from './store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 // import * as filters from './filters'
+import config from '../config/config.public'
 
-initApollo(Vue)
+Vue.use(VueApollo)
 
-VueApollo.setApolloClientOptions({
-  shouldBatch: true
-})
+const options = {}
+let url = '/graphql'
+if (global && global.isProd) {
+  options.ssrMode = true
+  url = `http://127.0.0.1:${config.port}/graphql`
+} else {
+  options.ssrForceFetchDelay = 100
+  url = `http://127.0.0.1:${config.port}/graphql`
+}
+
+VueApolloClient.setOptions(Object.assign(
+  {
+    networkInterface: createNetworkInterface(url, { credentials: 'same-origin' }),
+    shouldBatch: true
+  },
+  options
+))
 
 const App = require('./App.vue')
 
