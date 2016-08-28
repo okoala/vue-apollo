@@ -1,13 +1,13 @@
 import ApolloClient from 'apollo-client'
 import _ from 'lodash'
 
-// import gql from 'graphql-tag'
+import gql from 'graphql-tag'
 
-// if (window) {
-//   window['gql'] = gql
-// } else if (self) {
-//   self['gql'] = gql
-// }
+if (global) {
+  global['gql'] = gql
+} else if (window) {
+  window['gql'] = gql
+}
 
 const apolloClientOptions = {}
 let apolloClient = null

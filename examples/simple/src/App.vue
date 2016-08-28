@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-
 export default {
   data () {
     return {
@@ -54,7 +52,13 @@ export default {
   },
   apollo: {
     data: {
-      hello: gql`{hello}`,
+      hello: gql`{ hello }`,
+      tags: gql`{
+        tags {
+          id,
+          label
+        }
+      }`,
       pingMessage: {
         query: gql`query PingMessage($message: String!) {
           ping(message: $message)
@@ -74,14 +78,6 @@ export default {
         error(errors, type) {
           console.error(`We've got ${errors.length} errors of type '${type}'`)
         }
-      },
-      tags: {
-        query: gql`{
-          tags {
-            id,
-            label
-          }
-        }`
       }
     }
   },

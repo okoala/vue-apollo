@@ -10,12 +10,11 @@ Vue.use(VueApollo)
 
 const options = {}
 let url = '/graphql'
-if (global && global.isProd) {
+if (process.env.VUE_ENV === 'server') {
   options.ssrMode = true
   url = `http://127.0.0.1:${config.port}/graphql`
 } else {
   options.ssrForceFetchDelay = 100
-  url = `http://127.0.0.1:${config.port}/graphql`
 }
 
 VueApolloClient.setOptions(Object.assign(
