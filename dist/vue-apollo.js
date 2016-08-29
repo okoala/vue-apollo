@@ -1,5 +1,5 @@
 /*!
- * Vue-Apollo v1.0.1
+ * Vue-Apollo v1.0.2
  * (c) 2016 Koala Huang
  * Released under the MIT License.
  */
