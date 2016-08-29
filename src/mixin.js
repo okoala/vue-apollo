@@ -1,6 +1,6 @@
 import { DollarApollo } from './plugin'
 
-module.exports = function (Vue) {
+export default function mixin (Vue) {
   Vue.mixin({
     created () {
       this._apolloSubscriptions = []
