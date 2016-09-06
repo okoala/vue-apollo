@@ -1,16 +1,16 @@
 /*!
- * Vue-Apollo v1.0.2
+ * Vue-Apollo v1.0.3
  * (c) 2016 Koala Huang
  * Released under the MIT License.
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('apollo-client'), require('lodash'), require('graphql-tag')) :
-  typeof define === 'function' && define.amd ? define(['apollo-client', 'lodash', 'graphql-tag'], factory) :
-  (factory(global.apolloClient,global._,global.gql));
-}(this, function (apolloClient,_,gql) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('apollo-client'), require('lodash.merge'), require('graphql-tag')) :
+  typeof define === 'function' && define.amd ? define(['apollo-client', 'lodash.merge', 'graphql-tag'], factory) :
+  (factory(global.apolloClient,global.merge,global.gql));
+}(this, function (apolloClient,merge,gql) { 'use strict';
 
   var apolloClient__default = apolloClient['default'];
-  _ = 'default' in _ ? _['default'] : _;
+  merge = 'default' in merge ? merge['default'] : merge;
   gql = 'default' in gql ? gql['default'] : gql;
 
   var classCallCheck = function (instance, Constructor) {
@@ -54,7 +54,7 @@
     createClass(VueApolloClient, null, [{
       key: 'setOptions',
       value: function setOptions(options) {
-        _.merge(apolloClientOptions, options);
+        merge(apolloClientOptions, options);
         if (apolloClient$1) {
           console.warn('Options set after the apollo client has been created will not be applied.');
         }
