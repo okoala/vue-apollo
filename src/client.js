@@ -1,5 +1,5 @@
 import ApolloClient from 'apollo-client'
-import _ from 'lodash'
+import merge from 'lodash.merge'
 
 import gql from 'graphql-tag'
 
@@ -14,7 +14,7 @@ let apolloClient = null
 
 export class VueApolloClient {
   static setOptions (options) {
-    _.merge(apolloClientOptions, options)
+    merge(apolloClientOptions, options)
     if (apolloClient) {
       console.warn('Options set after the apollo client has been created will not be applied.')
     }
